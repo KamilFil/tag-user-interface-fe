@@ -1,0 +1,14 @@
+.header {
+    padding: 10px 20px;
+    background-color: #2173c2;
+}
+
+.header-img {
+    width: 200px;
+    height: 60px;
+}
+
+.header-img > img {
+    width: 100%;
+    height: 100%;
+}
