@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta} from "@storybook/react";
 import {TablePaginationHead} from "../views/TablePagination/components/TablePaginationHead";
 
 const meta: Meta<typeof TablePaginationHead> = {
@@ -9,9 +9,8 @@ const meta: Meta<typeof TablePaginationHead> = {
 
 export default meta
 
-type Story = StoryObj<typeof TablePaginationHead>
 
-export const EmptyItems: Story = {
+export const EmptyItems: { args: { data: number; columns: any[]; orderBy: string; active: { handleChangePage: () => void }; order: string } } = {
     args: {
         columns: [],
         data: 0,
@@ -23,7 +22,7 @@ export const EmptyItems: Story = {
     }
 }
 
-export const TwoItems: Story ={args: {
+export const TwoItems: { args: { data: number; columns: ({ headerName: string; field: string; width: number })[]; orderBy: string; active: { handleChangePage: () => void }; order: string } } ={args: {
     columns: [
         {
             field: 'name',

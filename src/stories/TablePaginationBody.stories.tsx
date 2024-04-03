@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta} from "@storybook/react";
 import {TablePaginationBody} from "../views/TablePagination/components/TablePaginationBody";
 
 const meta: Meta<typeof TablePaginationBody> = {
@@ -8,15 +8,15 @@ const meta: Meta<typeof TablePaginationBody> = {
 }
 
 export default meta
-type Story = StoryObj<typeof TablePaginationBody>
 
-export const EmptyItems: Story = {
+
+export const EmptyItems: { args: { visibleRows: any[] } } = {
     args: {
         visibleRows: []
     }
 }
 
-export const OneItems: Story = {
+export const OneItems: { args: { visibleRows: { name: string; count: number }[] } } = {
     args: {
     visibleRows: [
         {
@@ -25,7 +25,7 @@ export const OneItems: Story = {
         }]
 }}
 
-export const ManyItems: Story = {
+export const ManyItems: { args: { visibleRows: ({ name: string; count: number })[] } } = {
     args: {
         visibleRows: [
             {

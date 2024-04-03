@@ -17,25 +17,22 @@ export const EmptyItem: Story = {
         data: [],
         page: 0,
         rowsPerPage: 2,
-        handleChangePage: () => {},
-        handleChangeRowsPerPage: () => {},
+
 }
 }
-export const OneItem: Story = {
+export const OneItem: { args: { data: number[]; page: number; rowsPerPage: number } } = {
     args: {
         data: [1],
         page: 0,
         rowsPerPage: 2,
-        handleChangePage: () => {},
-        handleChangeRowsPerPage: () => {},
+
     }
 }
-export const ManyItems: Story = {
+export const ManyItems: { args: { data: number[]; page: number; rowsPerPage: number } } = {
     args: {
         data: [1,2,4,5,6,7,8,9,10],
         page: 0,
         rowsPerPage: 4,
-        handleChangePage: () => {},
-        handleChangeRowsPerPage: () => {},
+
     }
 }

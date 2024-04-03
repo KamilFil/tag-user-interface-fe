@@ -1,11 +1,24 @@
 import {Input, TableCell, TableHead, TableRow, TableSortLabel} from "@mui/material";
 import * as React from "react";
+import {Data, HeadCell} from "../TablePagination";
 
+interface Props {
+    orderBy: string;
+    order: 'asc' | 'desc';
+    setOrder: (value: 'asc' | 'desc') => void;
+    setOrderBy: (value: string) => void;
+    data: Data[];
+    columns: HeadCell[];
+    setPage: (value: number) => void;
+    setRowsPerPage: (value: number) => void;
+    rowsPerPage: number;
+}
 
-export const TablePaginationHead = ({ orderBy, order, setOrder, setOrderBy, data, columns, setPage, setRowsPerPage, rowsPerPage}) => {
+export const TablePaginationHead = (props:Props) => {
+    const {orderBy, order, setOrder, setOrderBy, data, columns, setPage, setRowsPerPage, rowsPerPage} = props
 
     const handleChangePageValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.value > data.length || e.target.value < 0) {
+        if(Number(e.target.value) > data.length || Number(e.target.value) < 0) {
             setRowsPerPage(8)
             setPage(0)
         }

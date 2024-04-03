@@ -6,38 +6,36 @@ import {
 
 } from "@mui/material";
 import {useCallback, useEffect, useMemo, useState} from "react";
-import * as React from "react";
 import {apiTag} from "../../../api/api";
 import {TablePaginationHead} from "./components/TablePaginationHead";
 import {TablePaginationFooter} from "./components/TablePaginationFooter";
 import {TablePaginationBody} from "./components/TablePaginationBody";
 
-
-
-
+export interface Data {
+    items:Tag[]
+}
 export interface Tag {
-    has_synonyms?: boolean;
-    is_moderator_only?: boolean;
-    is_required?: boolean;
-    count: number;
-    name: string;
+ [x: string]: string | number;
+
 }
 
-interface HeadCell {
+export interface HeadCell {
     field: string;
     headerName: string;
     width: number;
 }
 
+
+
 type Order = 'asc' | 'desc';
 
 export const TablePagination = () => {
+    const [data, setData] = useState<Data[] | []>([])
+    const [loading, setLoading] = useState<boolean | null>(null)
+    const [error, setError] = useState<string | null | boolean>(null)
     const [page, setPage] = useState(0);
-    const [loading, setLoading] = useState<boolean>(null)
-    const [error, setError] = useState<string | null>(null)
-    const [data, setData] = useState<Tag[]>([])
-    const [orderBy, setOrderBy] = useState('count');
     const [rowsPerPage, setRowsPerPage] = useState<number>(8);
+    const [orderBy, setOrderBy] = useState('count');
     const [order, setOrder] = useState<Order>('desc');
 
     function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -69,7 +67,7 @@ export const TablePagination = () => {
 
     const visibleRows = useMemo(
         () =>
-            stableSort(data, getComparator(order, orderBy)).slice(
+            stableSort(data as { [x: string]: string | number; }[], getComparator(order, orderBy)).slice(
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage,
             ),
@@ -117,8 +115,6 @@ export const TablePagination = () => {
                                 columns={columns}
                             />
                             <TablePaginationBody
-                                loading={loading}
-                                error={error}
                                 visibleRows={visibleRows}
                             />
                             <TablePaginationFooter
